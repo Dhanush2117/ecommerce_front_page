@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product page</title>
+</head>
+<body>
+        
+
+</html>
+<html lang="english">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopEasy - Our Products</title>
+
+</body>
+
+
+<style>
+  :root{
+    --blue:#2563eb;
+    --blue-dark:#56dbe2;
+    --green:#2cae5c;
+    --text:#1e293b;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --bg:#f8fafc;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Segoe UI', Arial, sans-serif;
+    background:var(--bg);
+    color:var(--text);
+  }
+  header{
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 32px;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:22px;
+    font-weight:700;
+  }
+  .logo-icon{
+    background:var(--blue);
+    color:#fff;
+    width:36px;
+    height:36px;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+  }
+  .logo span.easy{color:var(--blue);}
+  nav{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    font-weight:500;
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--text);
+    padding-bottom:6px;
+  }
+  nav a.active{
+    color:var(--blue);
+    border-bottom:2px solid var(--blue);
+  }
+  .cart-link{
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .cart-badge{
+    background:var(--blue);
+    color:#fff;
+    border-radius:50%;
+    width:20px;
+    height:20px;
+    font-size:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .search-box{
+    position:relative;
+  }
+  .search-box input{
+    padding:10px 40px 10px 14px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    width:240px;
+    font-size:14px;
+  }
+  .search-box .icon{
+    position:absolute;
+    right:12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:var(--muted);
+  }
+
+  main{
+    display:grid;
+    grid-template-columns:1fr 360px;
+    gap:24px;
+    max-width:1400px;
+    margin:24px auto;
+    padding:0 32px;
+  }
+  @media (max-width:960px){
+    main{grid-template-columns:1fr;}
+  }
+
+  h1.page-title{
+    font-size:26px;
+    margin-bottom:20px;
+  }
+
+  .products-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+    gap:20px;
+  }
+
+  .product-card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+  .product-img{
+    height:180px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:64px;
+  }
+  .product-info{
+    padding:16px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    flex:1;
+  }
+  .product-name{
+    font-weight:600;
+    font-size:16px;
+  }
+  .product-price{
+    color:var(--blue);
+    font-weight:700;
+    font-size:17px;
+  }
+  .stars{
+    color:#f59e0b;
+    font-size:14px;
+  }
+  .stars .count{
+    color:var(--muted);
+    margin-left:4px;
+  }
+  .add-btn{
+    margin-top:auto;
+    background:var(--blue);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:10px;
+    font-weight:600;
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    cursor:pointer;
+    transition:background .15s;
+  }
+  .add-btn:hover{background:var(--blue-dark);}
+  .add-btn:disabled{
+    background:#94a3b8;
+    cursor:default;
+  }
+
+  .perks{
+    margin-top:28px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:24px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+  }
+  .perk{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .perk .icon{font-size:22px;}
+  .perk h4{font-size:15px;margin-bottom:2px;}
+  .perk p{font-size:13px;color:var(--muted);}
+
+  /* Cart panel */
+  .cart-panel{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:20px;
+    height:fit-content;
+    position:sticky;
+    top:20px;
+  }
+  .cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+  }
+  .cart-header h2{font-size:19px;}
+  .clear-btn{
+    background:none;
+    border:none;
+    color:var(--muted);
+    cursor:pointer;
+    font-size:16px;
+  }
+  .clear-btn:hover{color:#dc2626;}
+
+  .cart-item{
+    display:flex;
+    gap:12px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px;
+    margin-bottom:12px;
+    position:relative;
+  }
+  .cart-item-img{
+    width:60px;
+    height:60px;
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    flex-shrink:0;
+  }
+  .cart-item-body{flex:1;}
+  .cart-item-name{font-weight:600;font-size:14px;}
+  .cart-item-price{color:var(--blue);font-weight:600;font-size:14px;margin:4px 0;}
+  .qty-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .qty-controls{
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .qty-btn{
+    width:26px;
+    height:26px;
+    border:1px solid var(--border);
+    background:#fff;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .qty-btn:hover{background:#f1f5f9;}
+  .item-total{font-weight:700;font-size:14px;}
+  .remove-btn{
+    position:absolute;
+    top:8px;
+    right:8px;
+    background:none;
+    border:none;
+    color:var(--muted);
+    cursor:pointer;
+    font-size:16px;
+  }
+  .remove-btn:hover{color:#dc2626;}
+
+  .empty-cart{
+    text-align:center;
+    color:var(--muted);
+    padding:30px 0;
+    font-size:14px;
+  }
+
+  .summary-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    padding:6px 0;
+    color:var(--text);
+  }
+  .summary-divider{
+    border:none;
+    border-top:1px solid var(--border);
+    margin:8px 0;
+  }
+  .total-row{
+    display:flex;
+    justify-content:space-between;
+    font-weight:700;
+    font-size:18px;
+    padding:8px 0 16px;
+  }
+  .total-row .amount{color:var(--green);}
+
+  .checkout-btn{
+    width:100%;
+    background:var(--green);
+    color:#fff;
+    border:none;
+    border-radius:8px;
+    padding:13px;
+    font-weight:600;
+    font-size:15px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    transition:background .15s;
+  }
+  .checkout-btn:hover{background:#15803d;}
+  .checkout-btn:disabled{
+    background:#94a3b8;
+    cursor:default;
+  }
+
+  .free-delivery-banner{
+    margin-top:14px;
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    border-radius:8px;
+    padding:12px;
+    font-size:13px;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    color:#1e40af;
+  }
+  .free-delivery-banner b{color:var(--blue-dark);}
+  .free-delivery-banner.success{
+    background:#f0fdf4;
+    border-color:#bbf7d0;
+    color:#166534;
+  }
+
+  footer{
+    text-align:center;
+    padding:24px;
+    color:var(--muted);
+    font-size:13px;
+    border-top:1px solid var(--border);
+    margin-top:20px;
+  }
+  footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+  footer a:hover{text-decoration:underline;}
+
+  .toast{
+    position:fixed;
+    bottom:24px;
+    left:50%;
+    transform:translateX(-50%) translateY(20px);
+    background:#1e293b;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:8px;
+    font-size:14px;
+    opacity:0;
+    pointer-events:none;
+    transition:all .25s ease;
+    z-index:100;
+  }
+  .toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+  }
+
+
+
+
+
+
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">🛒</div>
+    Shop<span class="easy">Easy</span>
+  </div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#" class="active">Products</a>
+    <a href="#" class="cart-link">Cart 🛒 <span class="cart-badge" id="navCartCount">0</span></a>
+  </nav>
+  <div class="search-box">
+    <input type="text" placeholder="Search products...">
+    <span class="icon">🔍</span>
+  </div>
+</header>
+
+
+
+
+<main>
+  <section>
+    <h1 class="page-title">Our Products</h1>
+    <div class="products-grid" id="productsGrid"></div>
+
+    <div class="perks">
+      <div class="perk"><span class="icon">🛡️</span><div><h4>Secure Payment</h4><p>100% secure payment</p></div></div>
+      <div class="perk"><span class="icon">🚚</span><div><h4>Free Delivery</h4><p>On orders above ₹499</p></div></div>
+      <div class="perk"><span class="icon">↩️</span><div><h4>Easy Returns</h4><p>30 day return policy</p></div></div>
+      <div class="perk"><span class="icon">🎧</span><div><h4>24/7 Support</h4><p>Customer support</p></div></div>
+    </div>
+  </section>
+
+  <aside class="cart-panel">
+    <div class="cart-header">
+      <h2 id="cartTitle">Your Cart (0)</h2>
+      <button class="clear-btn" id="clearCartBtn" title="Clear cart">🗑️</button>
+    </div>
+    <div id="cartItems"></div>
+
+    <div id="cartSummary"></div>
+
+    <button class="checkout-btn" id="checkoutBtn" disabled>🔒 Proceed to Checkout</button>
+
+    <div class="free-delivery-banner" id="deliveryBanner"></div>
+  </aside>
+</main>
+
+<footer>
+  © 2024 ShopEasy. All rights reserved.
+  <a href="#">Privacy Policy</a> | <a href="#">Terms &amp; Conditions</a> | <a href="#">Contact Us</a>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const FREE_DELIVERY_THRESHOLD = 499;
+  const DELIVERY_FEE = 100;
+
+  const products = [
+    { id:1, name:"Wireless Headphones", price:1499, rating:4, reviews:128, emoji:"🎧", color:"#dbeafe" },
+    { id:2, name:"Smart Watch", price:2499, rating:4, reviews:96, emoji:"⌚", color:"#f1f5f9" },
+    { id:3, name:"Bluetooth Speaker", price:999, rating:4, reviews:76, emoji:"🔊", color:"#ede9fe" },
+    { id:4, name:"Laptop Backpack", price:799, rating:5, reviews:54, emoji:"🎒", color:"#dcfce7" }
+  ];
+
+  let cart = {}; // { productId: qty }
+
+  const productsGrid = document.getElementById('productsGrid');
+  const cartItemsEl = document.getElementById('cartItems');
+  const cartSummaryEl = document.getElementById('cartSummary');
+  const cartTitleEl = document.getElementById('cartTitle');
+  const navCartCount = document.getElementById('navCartCount');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  const deliveryBanner = document.getElementById('deliveryBanner');
+  const toast = document.getElementById('toast');
+
+  function starString(rating){
+    let s = '';
+    for(let i=1;i<=5;i++){ s += i <= rating ? '★' : '☆'; }
+    return s;
+  }
+
+  function renderProducts(){
+    productsGrid.innerHTML = products.map(p => `
+      <div class="product-card">
+        <div class="product-img" style="background:${p.color}">${p.emoji}</div>
+        <div class="product-info">
+          <div class="product-name">${p.name}</div>
+          <div class="product-price">₹${p.price.toLocaleString('en-IN')}</div>
+          <div class="stars">${starString(p.rating)} <span class="count">(${p.reviews})</span></div>
+          <button class="add-btn" onclick="addToCart(${p.id})">🛒 Add to Cart</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function addToCart(id){
+    cart[id] = (cart[id] || 0) + 1;
+    const p = products.find(x => x.id === id);
+    showToast(`${p.name} added to cart`);
+    renderCart();
+  }
+
+  function changeQty(id, delta){
+    if(!cart[id]) return;
+    cart[id] += delta;
+    if(cart[id] <= 0){
+      delete cart[id];
+    }
+    renderCart();
+  }
+
+  function removeItem(id){
+    delete cart[id];
+    renderCart();
+  }
+
+  function clearCart(){
+    if(Object.keys(cart).length === 0) return;
+    cart = {};
+    renderCart();
+    showToast('Cart cleared');
+  }
+
+  function showToast(msg){
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => toast.classList.remove('show'), 1800);
+  }
+
+  function renderCart(){
+    const ids = Object.keys(cart);
+    const itemCount = ids.reduce((sum, id) => sum + cart[id], 0);
+
+    cartTitleEl.textContent = `Your Cart (${itemCount})`;
+    navCartCount.textContent = itemCount;
+
+    if(ids.length === 0){
+      cartItemsEl.innerHTML = `<div class="empty-cart">Your cart is empty.<br>Add some products to get started!</div>`;
+      cartSummaryEl.innerHTML = '';
+      checkoutBtn.disabled = true;
+      deliveryBanner.style.display = 'none';
+      return;
+    }
+
+    cartItemsEl.innerHTML = ids.map(id => {
+      const p = products.find(x => x.id == id);
+      const qty = cart[id];
+      const lineTotal = p.price * qty;
+      return `
+        <div class="cart-item">
+          <div class="cart-item-img" style="background:${p.color}">${p.emoji}</div>
+          <div class="cart-item-body">
+            <div class="cart-item-name">${p.name}</div>
+            <div class="cart-item-price">₹${p.price.toLocaleString('en-IN')}</div>
+            <div class="qty-row">
+              <div class="qty-controls">
+                <button class="qty-btn" onclick="changeQty(${p.id}, -1)">−</button>
+                <span>${qty}</span>
+                <button class="qty-btn" onclick="changeQty(${p.id}, 1)">+</button>
+              </div>
+              <div class="item-total">₹${lineTotal.toLocaleString('en-IN')}</div>
+            </div>
+          </div>
+          <button class="remove-btn" onclick="removeItem(${p.id})">✕</button>
+        </div>
+      `;
+    }).join('');
+
+    const subtotal = ids.reduce((sum, id) => sum + products.find(x=>x.id==id).price * cart[id], 0);
+    const delivery = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE;
+    const total = subtotal + delivery;
+
+    cartSummaryEl.innerHTML = `
+      <div class="summary-row"><span>Subtotal</span><span>₹${subtotal.toLocaleString('en-IN')}</span></div>
+      <div class="summary-row"><span>Delivery</span><span style="color:${delivery===0?'var(--green)':'inherit'}">${delivery===0 ? 'FREE' : '₹'+delivery}</span></div>
+      <hr class="summary-divider">
+      <div class="total-row"><span>Total</span><span class="amount">₹${total.toLocaleString('en-IN')}</span></div>
+    `;
+
+    checkoutBtn.disabled = false;
+
+    deliveryBanner.style.display = 'flex';
+    if(subtotal >= FREE_DELIVERY_THRESHOLD){
+      deliveryBanner.className = 'free-delivery-banner success';
+      deliveryBanner.innerHTML = `🚚 <span>You've unlocked <b>FREE Delivery!</b></span>`;
+    } else {
+      const remaining = FREE_DELIVERY_THRESHOLD - subtotal;
+      deliveryBanner.className = 'free-delivery-banner';
+      deliveryBanner.innerHTML = `🚚 <span>Add more items worth <b>₹${remaining}</b> to get <b>FREE Delivery!</b></span>`;
+    }
+  }
+
+  document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+  document.getElementById('checkoutBtn').addEventListener('click', () => {
+    showToast('Proceeding to checkout...');
+  });
+
+  renderProducts();
+  renderCart();
+</script>
+
+</body>
+</html>
